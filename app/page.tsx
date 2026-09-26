@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
 import { Store, UserRound, Package, Wrench, ArrowUpRight, ArrowRight, Leaf, ShieldCheck, Handshake, Sprout } from 'lucide-react';
+import { BASE_PATH, asset } from '@/lib/site';
 
 const loanTermRates = [
   { label: '1 Week', weeks: 1, rate: 0.15 },
@@ -61,7 +62,7 @@ export default function Home() {
       `}</style>
       <header className="nav">
         <a className="brand" href="#top">
-          <img className="brand-logo" src="/images/logo.png" alt="Ohio Microfinance Limited logo" />
+          <img className="brand-logo" src={asset("/images/logo.png")} alt="Ohio Microfinance Limited logo" />
           <span>
             OHIO
             <small>MICROFINANCE LIMITED</small>
@@ -92,7 +93,7 @@ export default function Home() {
             Microfinance Limited.
           </p>
           <div className="actions">
-            <a className="button" href="/apply">
+            <a className="button" href={`${BASE_PATH}/apply/`}>
               Apply for a loan <ArrowUpRight size={19} />
             </a>
             <a className="textlink" href="#loans">
@@ -105,7 +106,7 @@ export default function Home() {
         </div>
 
         <div className="hero-art">
-          <img src="/images/tailor.webp" alt="Small business owner at work in a tailoring studio" />
+          <img src={asset("/images/tailor.webp")} alt="Small business owner at work in a tailoring studio" />
           <div className="image-label">
             <span className="label-icon">
               <Sprout />
@@ -252,10 +253,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="cta-row">
-                <a className="button lime" href="/apply?type=personal">
+                <a className="button lime" href={`${BASE_PATH}/apply/?type=personal`}>
                   Apply Personal
                 </a>
-                <a className="button secondary" href="/apply?type=business">
+                <a className="button secondary" href={`${BASE_PATH}/apply/?type=business`}>
                   Apply Business
                 </a>
               </div>
@@ -290,7 +291,7 @@ export default function Home() {
               <span>Home improvements</span>
               <span>Personal needs</span>
             </div>
-            <a className="textlink" href="/apply?type=personal">
+            <a className="textlink" href={`${BASE_PATH}/apply/?type=personal`}>
               Apply for a personal loan <ArrowUpRight size={20} />
             </a>
           </article>
@@ -309,7 +310,7 @@ export default function Home() {
               <span>Equipment</span>
               <span>Growth</span>
             </div>
-            <a className="textlink" href="/apply?type=business">
+            <a className="textlink" href={`${BASE_PATH}/apply/?type=business`}>
               Apply for a business loan <ArrowUpRight size={20} />
             </a>
           </article>
@@ -319,7 +320,7 @@ export default function Home() {
       <section id="business" className="business-section reveal">
         <div className="business-photo">
           <img
-            src="/images/grocer.webp"
+            src={asset("/images/grocer.webp")}
             alt="A neighborhood grocery owner surrounded by produce and stocked shelves"
             loading="lazy"
           />
@@ -349,7 +350,7 @@ export default function Home() {
               <p>Explore funding for equipment that supports your work.</p>
             </div>
           </div>
-          <a className="button lime" href="/apply?type=business">
+          <a className="button lime" href={`${BASE_PATH}/apply/?type=business`}>
             Start a business application <ArrowUpRight size={19} />
           </a>
         </div>
@@ -387,14 +388,14 @@ export default function Home() {
           Your next chapter<br />
           starts with one small step.
         </h2>
-        <a className="button lime" href="/apply">
+        <a className="button lime" href={`${BASE_PATH}/apply/`}>
           Apply for a loan <ArrowUpRight size={20} />
         </a>
       </section>
 
       <footer className="site-footer">
         <div className="footer-brand">
-          <img className="footer-logo" src="/images/logo.png" alt="Ohio Microfinance Limited logo" />
+          <img className="footer-logo" src={asset("/images/logo.png")} alt="Ohio Microfinance Limited logo" />
           <div className="brand-title">Ohio Microfinance Limited</div>
           <p>Financing today, building tomorrow, changing lives.</p>
           <div className="collateral-badge">
@@ -405,7 +406,7 @@ export default function Home() {
         <div className="footer-contact">
           <h3>Get in touch</h3>
           <div className="contact-row">
-            <span className="contact-icon"><img src="/images/whatsapp.jpeg" alt="WhatsApp" /></span>
+            <span className="contact-icon"><img src={asset("/images/whatsapp.jpeg")} alt="WhatsApp" /></span>
             <div>
               <p>WhatsApp</p>
               <a href="https://wa.me/265993799137" target="_blank" rel="noreferrer">099 379 9137</a>
@@ -426,7 +427,7 @@ export default function Home() {
             </div>
           </div>
           <div className="contact-row">
-            <span className="contact-icon location"><img src="/images/location.png" alt="Location" /></span>
+            <span className="contact-icon location"><img src={asset("/images/location.png")} alt="Location" /></span>
             <div>
               <p>Location</p>
               <span>Zomba, Blantyre, Mzuzu, Lilongwe, Malawi</span>
@@ -447,7 +448,7 @@ export default function Home() {
               <a href="#calculator">Calculator</a>
             </li>
             <li>
-              <a href="/apply">Apply Now</a>
+              <a href={`${BASE_PATH}/apply/`}>Apply Now</a>
             </li>
           </ul>
         </div>

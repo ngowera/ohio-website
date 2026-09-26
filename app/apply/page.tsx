@@ -16,6 +16,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { MAX_PHOTO_BYTES, validateDetails, type LoanKind } from "@/lib/loan";
+import { submitLoanApplication } from "@/lib/supabase-application";
+import { asset } from "@/lib/site";
 function PhotoUpload({
   id,
   title,
@@ -236,18 +238,7 @@ export default function Apply() {
     form.set("collateral", collateral!);
     if (kind === "business" && businessLicense) form.set("businessLicense", businessLicense);
     try {
-      const response = await fetch("/api/applications", {
-        method: "POST",
-        body: form,
-      });
-      const data = (await response.json()) as {
-        error?: string;
-        reference: string;
-      };
-      if (!response.ok)
-        throw Error(
-          data.error || "We could not save your application. Please try again.",
-        );
+      const data = await submitLoanApplication(form);
       setReference(data.reference);
       setStep(3);
       setPhoto(null);
@@ -266,7 +257,7 @@ export default function Apply() {
     <main className="application-page">
       <header className="nav">
         <Link className="brand" href="/">
-          <img className="brand-logo" src="/images/logo.png" alt="Ohio Microfinance Limited logo" />
+          <img className="brand-logo" src={asset("/images/logo.png")} alt="Ohio Microfinance Limited logo" />
           <span>
             OHIO<small>MICROFINANCE LIMITED</small>
           </span>
@@ -312,7 +303,7 @@ export default function Apply() {
           </div>
           <img
             className="aside-photo"
-            src="/images/grocer.webp"
+            src={asset("/images/grocer.webp")}
             alt="Shop owner standing beside fresh produce"
           />
         </aside>
