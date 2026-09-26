@@ -11,12 +11,12 @@ Run `npm run build` to create the production build.
 
 Personal: full name, phone number, amount in MWK, applicant photo, collateral photo.
 Business: the same fields plus business name.
-Applicants review details and consent before sending. JPG, PNG and WebP uploads are limited to 2 MB per photo. Client and server validation enforce the basic requirements. Successful submissions receive a reference; retries with the same request ID do not duplicate the application.
+Applicants review details and consent before sending. JPG, PNG and WebP uploads are limited to 5 MB per photo. Client and server validation enforce the basic requirements. Successful submissions receive a reference; retries with the same request ID do not duplicate the application.
 
-## Storage and operations
+## Supabase and Money OS
 
-The server writes each application and both photos atomically into the private Sites-managed R2 binding `BUCKET`. Files are not served publicly. Local preview uses local emulated storage; local test submissions are not production applications.
+The website server validates each application, then writes a pending Renmal Capital Limited record to `loan_applications`, uploads images into private Supabase Storage buckets, and adds linked `customer_documents` rows using the project publishable key and strict row-level policies. Applications therefore appear in the existing Money OS/ProCorporate review workflow; files are never made public.
 
-This version contains the customer submission workflow. It does not yet include a staff review dashboard or email/SMS notifications. Staff access and retention procedures should be configured before public customer intake. The default deployed Site is private to its owner.
+Production submissions use the website server route, so the site must be hosted on a platform that supports the server build rather than as static GitHub Pages files.
 
 Company rates, repayment periods, address and contact information were not supplied, so no numerical lending terms, approval promises or fictitious contact details have been added. Photography is illustrative, not customer testimony.
