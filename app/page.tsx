@@ -14,7 +14,7 @@ const loanPresets = [100000, 500000, 1000000, 2000000];
 
 export default function Home() {
   const [loanAmount, setLoanAmount] = useState(1000000);
-  const [customAmount, setCustomAmount] = useState('1000000');
+  const [customAmount, setCustomAmount] = useState('');
   const [selectedTerm, setSelectedTerm] = useState(3);
 
   useEffect(() => {
@@ -150,7 +150,7 @@ export default function Home() {
                     className={loanAmount === amount ? 'preset active' : 'preset'}
                     onClick={() => {
                       setLoanAmount(amount);
-                      setCustomAmount(String(amount));
+                      setCustomAmount('');
                     }}
                   >
                     {amount >= 1000000 ? `${amount / 1000000}M` : `${Math.round(amount / 1000)}K`}
@@ -163,7 +163,7 @@ export default function Home() {
                   inputMode="numeric"
                   min={minLoan}
                   max={maxLoan}
-                  placeholder="Enter custom amount"
+                  placeholder="Type here..."
                   value={customAmount}
                   onChange={(e) => {
                     const nextValue = e.target.value.replace(/[^0-9]/g, '');
@@ -195,7 +195,7 @@ export default function Home() {
                 onChange={(e) => {
                   const value = Number(e.target.value);
                   setLoanAmount(value);
-                  setCustomAmount(String(value));
+                  setCustomAmount('');
                 }}
               />
             </div>
