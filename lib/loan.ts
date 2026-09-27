@@ -9,7 +9,7 @@ export function validateDetails(data: { kind: string; name: string; phone: strin
   if (data.guarantorName.trim().length < 2 || data.guarantorName.length > 100) return 'Enter your guarantor full name (2–100 characters).';
   if (!/^\+?[0-9\s()-]{7,25}$/.test(data.guarantorPhone.trim()) || data.guarantorPhone.replace(/\D/g, '').length < 7) return 'Enter a valid guarantor phone number.';
   const amount = Number(data.amount);
-  if (!/^\d+(\.\d{1,2})?$/.test(data.amount) || Number.isNaN(amount) || amount < 100000 || amount > 1000000) return 'Loan amount must be between MWK 100,000 and MWK 1,000,000.';
+  if (!/^\d+(\.\d{1,2})?$/.test(data.amount) || Number.isNaN(amount) || amount < 100000 || amount > 2000000) return 'Loan amount must be between MWK 100,000 and MWK 2,000,000.';
   if (data.kind === 'business' && (data.business.trim().length < 2 || data.business.length > 150)) return 'Enter your business name (2–150 characters).';
   return '';
 }

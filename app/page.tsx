@@ -10,7 +10,7 @@ const loanTermRates = [
   { label: '4 Wks', weeks: 4, rate: 0.6 },
 ];
 
-const loanPresets = [100000, 500000, 1000000];
+const loanPresets = [100000, 500000, 1000000, 2000000];
 
 export default function Home() {
   const [loanAmount, setLoanAmount] = useState(1000000);
@@ -41,7 +41,7 @@ export default function Home() {
 
   const interestAmount = Math.round(loanAmount * termInfo.rate);
   const totalRepayment = loanAmount + interestAmount;
-  const maxLoan = 1000000;
+  const maxLoan = 2000000;
   const minLoan = 100000;
 
   return (
@@ -153,7 +153,7 @@ export default function Home() {
                       setCustomAmount(String(amount));
                     }}
                   >
-                    {amount === 1000000 ? '1M' : `${Math.round(amount / 1000)}K`}
+                    {amount >= 1000000 ? `${amount / 1000000}M` : `${Math.round(amount / 1000)}K`}
                   </button>
                 ))}
               </div>
