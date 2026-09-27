@@ -15,7 +15,7 @@ Applicants review details and consent before sending. JPG, PNG and WebP uploads 
 
 ## Supabase and Money OS
 
-The website server validates each application, then writes a pending Renmal Capital Limited record to `loan_applications`, uploads images into private Supabase Storage buckets, and adds linked `customer_documents` rows using the project publishable key and strict row-level policies. Applications therefore appear in the existing Money OS/ProCorporate review workflow; files are never made public.
+The website server validates each application, then writes a pending Ohio Microfinance Limited record to `loan_applications`, uploads images into private Supabase Storage buckets, and adds linked `customer_documents` rows using the project publishable key and strict row-level policies. Applications therefore appear in Ohio Microfinance organization `0003` in the Money OS/ProCorporate review workflow; files are never made public.
 
 Production submissions use the website server route, so the site must be hosted on a platform that supports the server build rather than as static GitHub Pages files.
 

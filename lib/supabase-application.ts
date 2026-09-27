@@ -1,6 +1,6 @@
 const SUPABASE_URL = "https://hycgfmdyujfqfbinsuxx.supabase.co";
 const SUPABASE_KEY = "sb_publishable_0HZGlLuuA5xUSu6TcFmS3w_1TQ-IuOf";
-const COMPANY_ID = "0001";
+const COMPANY_ID = "0003";
 const headers = { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` };
 
 function objectUrl(bucket: string, path: string) {
