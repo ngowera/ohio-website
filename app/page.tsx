@@ -423,7 +423,7 @@ export default function Home() {
             <span className="contact-icon">✉️</span>
             <div>
               <p>Email</p>
-              <a href="mailto:ohiomicrofinance40@gmail.com">ohiomicrofinance40@gmail.com</a>
+              <a href="mailto:ohiomicrofinance@gmail.com">ohiomicrofinance@gmail.com</a>
             </div>
           </div>
           <div className="contact-row">
