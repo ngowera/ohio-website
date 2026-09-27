@@ -409,7 +409,7 @@ export default function Home() {
             <span className="contact-icon"><img src={asset("/images/whatsapp.jpeg")} alt="WhatsApp" /></span>
             <div>
               <p>WhatsApp</p>
-              <a href="https://wa.me/265993799137" target="_blank" rel="noreferrer">099 379 9137</a>
+              <a href="https://wa.me/265993789137" target="_blank" rel="noreferrer">099 378 9137</a>
             </div>
           </div>
           <div className="contact-row">
