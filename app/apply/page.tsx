@@ -127,12 +127,12 @@ export default function Apply() {
   const [kind, setKind] = useState<LoanKind>("personal");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [nationalId, setNationalId] = useState("");
   const [guarantorName, setGuarantorName] = useState("");
   const [guarantorPhone, setGuarantorPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [business, setBusiness] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
+  const [nationalIdPhoto, setNationalIdPhoto] = useState<File | null>(null);
   const [collateral, setCollateral] = useState<File | null>(null);
   const [businessLicense, setBusinessLicense] = useState<File | null>(null);
   const [step, setStep] = useState(1);
@@ -195,14 +195,13 @@ export default function Apply() {
       kind,
       name,
       phone,
-      nationalId,
       guarantorName,
       guarantorPhone,
       amount,
       business,
     });
-    if (message || !photo || !collateral || (kind === "business" && !businessLicense)) {
-      setError(message || "Please add your photo, collateral photo and business licence.");
+    if (message || !photo || !nationalIdPhoto || !collateral || (kind === "business" && !businessLicense)) {
+      setError(message || (kind === "business" ? "Please add your photo, National ID photo, collateral photo and business licence." : "Please add your photo, National ID photo and collateral photo."));
       return;
     }
     requestId.current = "";
@@ -226,7 +225,6 @@ export default function Apply() {
       kind,
       name,
       phone,
-      nationalId,
       guarantorName,
       guarantorPhone,
       amount,
@@ -235,6 +233,7 @@ export default function Apply() {
       consent: "yes",
     }).forEach(([k, v]) => form.set(k, v));
     form.set("photo", photo!);
+    form.set("nationalIdPhoto", nationalIdPhoto!);
     form.set("collateral", collateral!);
     if (kind === "business" && businessLicense) form.set("businessLicense", businessLicense);
     try {
@@ -242,6 +241,7 @@ export default function Apply() {
       setReference(data.reference);
       setStep(3);
       setPhoto(null);
+      setNationalIdPhoto(null);
       setCollateral(null);
     } catch (e) {
       setError(
@@ -404,16 +404,6 @@ export default function Apply() {
                         />
                       </label>
                       <label>
-                        National ID
-                        <Input
-                          value={nationalId}
-                          onChange={(e) => setNationalId(e.target.value)}
-                          required
-                          maxLength={20}
-                          placeholder="e.g. 1234567890123"
-                        />
-                      </label>
-                      <label>
                         Loan amount (MWK)
                         <Input
                           inputMode="decimal"
@@ -474,6 +464,13 @@ export default function Apply() {
                         setFile={setPhoto}
                       />
                       <PhotoUpload
+                        id="national-id-photo"
+                        title="National ID photo"
+                        note="Upload a clear photo of your National ID"
+                        file={nationalIdPhoto}
+                        setFile={setNationalIdPhoto}
+                      />
+                      <PhotoUpload
                         id="collateral-photo"
                         title="Collateral photo"
                         note="Show the item clearly"
@@ -525,7 +522,7 @@ export default function Apply() {
                     </div>
                     <div>
                       <dt>National ID</dt>
-                      <dd>{nationalId}</dd>
+                      <dd>Photo attached</dd>
                     </div>
                     <div>
                       <dt>Guarantor</dt>
@@ -553,7 +550,7 @@ export default function Apply() {
                     <div>
                       <dt>Photos</dt>
                       <dd>
-                        Your photo & collateral photo attached
+                        Your photo, National ID photo & collateral photo attached
                         {kind === "business" ? "; business licence attached" : ""}
                       </dd>
                     </div>

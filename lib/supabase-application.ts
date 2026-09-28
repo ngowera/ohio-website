@@ -13,6 +13,7 @@ export async function submitLoanApplication(form: FormData) {
   const kind = str("kind");
   const definitions = [
     { field: "photo", bucket: "applicant-photos", documentType: "Applicant Photo" },
+    { field: "nationalIdPhoto", bucket: "national-id-documents", documentType: "National ID Photo" },
     { field: "collateral", bucket: "collateral-documents", documentType: "Collateral Photo" },
     ...(kind === "business" ? [{ field: "businessLicense", bucket: "business-licences", documentType: "Business Licence" }] : []),
   ];
@@ -35,7 +36,6 @@ export async function submitLoanApplication(form: FormData) {
   const reference = `OHIO-${id.toUpperCase()}`;
   const name = str("name");
   const phone = str("phone");
-  const nationalId = str("nationalId").replace(/[\s-]+/g, "");
   const guarantorName = str("guarantorName");
   const guarantorPhone = str("guarantorPhone");
   const amount = Number(str("amount"));
@@ -43,11 +43,11 @@ export async function submitLoanApplication(form: FormData) {
   const submittedAt = new Date().toISOString();
   const documentUrls = files.map((item) => ({ bucket: item.bucket, path: item.path, type: item.documentType }));
   const application = {
-    id, company_id: COMPANY_ID, customer_name: name, full_name: name, phone, national_id: nationalId,
+    id, company_id: COMPANY_ID, customer_name: name, full_name: name, phone, national_id: null,
     amount, loan_amount: amount, status: "Pending", guarantor_name: guarantorName, guarantor_phone: guarantorPhone,
     business_name: kind === "business" ? business : null,
     form_type: kind === "business" ? "Business Loan" : "Personal Loan",
-    form_data: { source: "Ohio website", reference, submittedAt, loanType: kind, fullName: name, phone, nationalId, loanAmount: amount, guarantorName, guarantorPhone, ...(kind === "business" ? { businessName: business } : {}) },
+    form_data: { source: "Ohio website", reference, submittedAt, loanType: kind, fullName: name, phone, nationalIdPhotoProvided: true, loanAmount: amount, guarantorName, guarantorPhone, ...(kind === "business" ? { businessName: business } : {}) },
     document_urls: documentUrls,
   };
   const appInsert = await fetch(`${SUPABASE_URL}/rest/v1/loan_applications`, {
