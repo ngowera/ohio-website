@@ -11,11 +11,14 @@ export async function submitLoanApplication(form: FormData) {
   const str = (key: string) => String(form.get(key) || "").trim();
   const id = str("requestId");
   const kind = str("kind");
+  const businessLicense = form.get("businessLicense");
   const definitions = [
     { field: "photo", bucket: "applicant-photos", documentType: "Applicant Photo" },
     { field: "nationalIdPhoto", bucket: "national-id-documents", documentType: "National ID Photo" },
     { field: "collateral", bucket: "collateral-documents", documentType: "Collateral Photo" },
-    ...(kind === "business" ? [{ field: "businessLicense", bucket: "business-licences", documentType: "Business Licence" }] : []),
+    ...(kind === "business" && businessLicense instanceof File
+      ? [{ field: "businessLicense", bucket: "business-licences", documentType: "Business Licence" }]
+      : []),
   ];
   const files = definitions.map((definition) => {
     const file = form.get(definition.field);

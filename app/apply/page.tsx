@@ -200,8 +200,8 @@ export default function Apply() {
       amount,
       business,
     });
-    if (message || !photo || !nationalIdPhoto || !collateral || (kind === "business" && !businessLicense)) {
-      setError(message || (kind === "business" ? "Please add your photo, National ID photo, collateral photo and business licence." : "Please add your photo, National ID photo and collateral photo."));
+    if (message || !photo || !nationalIdPhoto || !collateral) {
+      setError(message || "Please add your photo, National ID photo and collateral photo.");
       return;
     }
     requestId.current = "";
@@ -452,7 +452,7 @@ export default function Apply() {
                       <h3>{kind === "business" ? "Your documents and photos" : "Two photos, and you’re set."}</h3>
                       <p>
                         Add a clear photo of yourself and the item you offer as collateral.
-                        {kind === "business" ? " Include your business licence as well." : ""}
+                        {kind === "business" ? " You may also include your business licence if available." : ""}
                       </p>
                     </div>
                     <div className="upload-grid">
@@ -480,8 +480,8 @@ export default function Apply() {
                       {kind === "business" && (
                         <PhotoUpload
                           id="business-license"
-                          title="Business licence"
-                          note="A clear photo of your business licence"
+                          title="Business licence (optional)"
+                          note="Upload a clear photo if available"
                           file={businessLicense}
                           setFile={setBusinessLicense}
                         />
@@ -551,7 +551,11 @@ export default function Apply() {
                       <dt>Photos</dt>
                       <dd>
                         Your photo, National ID photo & collateral photo attached
-                        {kind === "business" ? "; business licence attached" : ""}
+                        {kind === "business"
+                          ? businessLicense
+                            ? "; business licence attached"
+                            : "; business licence not attached (optional)"
+                          : ""}
                       </dd>
                     </div>
                   </dl>
